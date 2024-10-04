@@ -67,10 +67,10 @@
     
     for($i = 0; $i < count($videojuegos);$i++){  //el count devulve cuantas filas hay
        // $autobuses[$i][4]= "X";
-       if ($videojuegos[$i][3] == 0 ) {
+       if ($videojuegos[$i][3]  ) {
         $videojuegos[$i] [4]= "Gratis";
         } else{
-            $videojuegos[$i][4]= "No es gatris";
+            $videojuegos[$i][4] = "Gratis";
         }
             
     } 
