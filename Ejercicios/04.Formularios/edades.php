@@ -16,5 +16,27 @@
         >= 65, se mostrará "X SE HA JUBILADO"
         Hacer la lógica con la estructura MATCH
     -->
+    <form action="" method="post">
+        <input type="text" name="nombre"><br><br>
+        <input type="text" name="edad"><br><br>
+        <input type="submit" value="Comprobar">
+
+    </form>
+    <?php
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nombre = (int)$_POST ["nombre"];
+        $edad = (int) $_POST ["edad"];
+        $resultado = match (true) {
+            $edad <18 => "es menor de edad",
+            $edad >=18 and $edad < 65 => "es mayor de edad",
+            $edad >=65 => "es menor de edad"
+        };
+
+        
+
+        echo "<h1> $nombre $resultado</h1>";
+        
+    }
+    ?>
 </body>
 </html>
