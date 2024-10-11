@@ -56,7 +56,7 @@
             <?php } ?>
         
         </tbody>
-    </table>
+    </table>s
     <br><br>
     <form action="" method="post">
         <label for = "producto">Nombre del producto</label>
@@ -66,7 +66,7 @@
     <?php
     // $producto = $__POST["producto"]; si lo pones aqui esta mal, ya que no va a tener valores pq esta al principio
     if($_SERVER["REQUEST_METHOD"] == "POST"){ //aqui el post siempre en mayusculas, el __server es como una array
-            $producto = $__POST["producto"];
+            $producto = $_POST["producto"];
 
             $i = 0;
             $fila_producto = null;
