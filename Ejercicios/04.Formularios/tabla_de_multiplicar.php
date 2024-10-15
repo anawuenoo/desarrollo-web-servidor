@@ -3,41 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de multiplicars</title>
+    <title>Tablas de multiplicar</title>
 </head>
 <body>
-    <!--
-        Crear un formulario que reciba un número.Se mostrará en una tabla HTML la 
-        tabla de multiplicar de ese número. Ejemplo:
-         3 x 1 = 3
-         3 x 2 = 6
-         3 x 3 = 9
-         ...
-         3 x 10 = 30
-    -->
-         
+<!--
+    Crear un formulario que reciba un número. Se mostrara en una tabla HTML
+    la tabla de multipcar de ese numero.
+-->
 
-   
     <form action="" method="post">
-        <label for = "numero">Numero</label>
-        <input type="text" name="numero1" id="numero1" placeholder="Introduce un número">
-        <br><br>
-        <input type="submit" value="Genera tabla de multiplicar">
+        <input type="text" name="numero" id="numero">
+        <input type="submit">
     </form>
+
     <?php
-    if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $numero1 = $_POST["numero1"];
-    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $numero = $_POST["numero"];
+        $res = 0;
+        ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>Operacion</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody>
 
-        for($i = 1; $i <= 10; $i++){
-            echo "<p>$numero x $i  = " . $numero*$i . "</p>";
+            
+        <?php
+        for ($i=1; $i <= 10; $i++) { 
+            $res = $numero * $i;
+            ?>
+            <tr>
+                <td><?php echo "$numero x $i" ?></td>
+                <td><?php echo "$res" ?></td>
+            </tr>
+        <?php
+        } ?>
+            </tbody>
+        </table>
 
-           
-        }
+    <?php
     }
-    
-    
     ?>
-   
 </body>
 </html>
