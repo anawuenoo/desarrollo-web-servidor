@@ -4,30 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Autobuses</title>
-    <link rel="stylesheet" type="text/css" href="estilos.css">
+    <link href="estilos.css" rel="stylesheet" type="text/css">
     <?php
         error_reporting( E_ALL );
         ini_set( "display_errors", 1 );
     ?>
-    
 </head>
 <body>
     <?php
-    $autobuses=[
-        ["Málaga","Ronda",90,10],
-        ["Churriana","Málaga",20,3],
-        ["Málaga","Granada",120,15],
-        ["Torremolinos","Málaga",00,3.5]
-    ];
-    /**
-     * Ejercicio 1: Añadir dos lineas de autobús.
-     * 
-     * Ejercicio 2: Ordenar por duración de más duración a menos.
-     * 
-     * Ejercicio 3: Mostrar las líneas en una tabla.
-     */
-    ?>
-<?php
     # Origen, Destino, Duración (min), Precio (€)
     $autobuses = [
         ["Málaga", "Ronda", 90, 10],
@@ -59,10 +43,11 @@
     $_origen = array_column($autobuses, 0);
     $_duracion = array_column($autobuses, 2);
     $_precio = array_column($autobuses, 3);
-    array_multisort($_origen, SORT_ASC, $_duracion, SORT_ASC, $_precio, SORT_ASC, $autobuses); #CUANDO HAY VARIOS IGUALES, OSEA MALAGA SE REPITE SE ORDENA POR LA DURACION POR EJEMPLO
-           
-        //unset($autobuses[2]); para borrar un autobus pero tiene que ser en la psocion que este por ejemplo si esta en la 1 hay q poner 1
-        //unset($autobuses[5]); hay q tener cuidado ya que al borrar un autobus y queremos borrar otro tenemos que tener en cuenta la clave principal, pq si borrar la 1 se queda pero vacio
+    array_multisort($_origen, SORT_ASC, $_duracion, SORT_ASC, $_precio, SORT_ASC, $autobuses);
+
+    //unset($autobuses[1]);
+    //unset($autobuses[5]);
+    
     /**
      * Ejercicio 4: Insertar 3 autobuses más
      * 
