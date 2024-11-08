@@ -15,6 +15,7 @@
         >= 18 && < 65, se mostrará "X ES MAYOR DE EDAD"
         >= 65, se mostrará "X SE HA JUBILADO"
         Hacer la lógica con la estructura MATCH
+
     -->
     <form action="" method="post">
         <input type="text" name="nombre"><br><br>
@@ -24,10 +25,11 @@
 
     <?php
     function depurar (string $entrada) : string{
-        $salida = htmlspecialchars($entrada);
-        $salida = trim($salida);
-        $salida = preg_replace('/\s+/', ' ', $salida);
+        $salida = htmlspecialchars($entrada); //como texto plano
+        $salida = trim($salida);//quitar los espacios en blanco de los lados
+        $salida = preg_replace('/\s+/', ' ', $salida);//quitaba los esapcios en blanco en uno, siempre deja uno, 
         return $salida;
+        //'  pepe   luis  ' -> 'pepe luis'
     }
     ?>
 
