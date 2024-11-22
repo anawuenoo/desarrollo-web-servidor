@@ -1,0 +1,33 @@
+RELACIÓN --> de uno a muchos
+		
+1.CARPETAS:
+	tienda(carpeta)
+		
+		productos(carpeta1)
+			index.php
+			nuevo_producto.php
+			editar_producto.php
+		categorias(carpeta1)
+			index.php
+			nueva_categoria.php
+			editar_categoria.php
+	imagenes(carpeta1)
+	
+	util(carpeta1)
+		conexiones.phpRELACIÓN --> de uno a muchos
+		
+1.CARPETAS:
+	tienda(carpeta)
+		
+		productos(carpeta1)
+			index.php
+			nuevo_producto.php
+			editar_producto.php
+		categorias
+		index.php
+			nueva_categoria.php
+			editar_categoria.php
+	imagenes(carpeta1)
+	
+	util(carpeta1)
+		conexiones.php
