@@ -1,3 +1,15 @@
+clase-->Categoria
+		categoria-->VARCHAR(30)(id) diasable  en el input
+		descripcion-->VARCHAR (255)
+	Productos
+		id_producto-->int(6)auto_increment
+		nombre-->VARCHAR(50)
+		precio--> NUMERIC(6,2)
+		categoria-->VARCHAR(30)
+		stock-->int(3) default = 0,(si no se indica el stock sea 0)
+		imagen-->VARCHAR(60)
+		descripcion-->VARCHAR (255)
+
 RELACIÓN --> de uno a muchos
 		
 1.CARPETAS:
