@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <?php
-            $sql = "SELECT * FROM categorias";
+            $sql = "SELECT * FROM categoria";
             $resultado = $_conexion -> query($sql);
         ?>
         <table class="table table-striped">

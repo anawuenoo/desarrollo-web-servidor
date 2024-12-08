@@ -25,8 +25,8 @@
                     <th>Precio</th>
                     <th>Categoria</th>
                     <th>Stock</th>
-                    <th>Descripcion</th>
                     <th>Imagen</th>
+                    <th>Descripcion</th>
 
             
                 </tr>
@@ -38,8 +38,8 @@
                     echo"<td>" .$fila["nombre"] . "</td>";
                     echo"<td>" .$fila["precio"] . "</td>";
                     echo"<td>" .$fila["stock"] . "</td>";
-                    echo"<td>" .$fila["descripcion"] . "</td>";
                     echo"<td>" .$fila["imagen"] . "</td>";
+                    echo"<td>" .$fila["descripcion"] . "</td>";
                     echo"</tr>";
                 }
                 ?>
