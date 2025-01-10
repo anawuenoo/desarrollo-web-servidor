@@ -34,14 +34,31 @@
                 $nombre_imagen = $_FILES["imagen"]["name"];
                 move_uploaded_file($direccion_temporal, "imagenes/$nombre_imagen");
 
-                $sql = "INSERT INTO animes 
+               /* $sql = "INSERT INTO animes 
                     (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
                     VALUES
                     ('$titulo', '$nombre_estudio', $anno_estreno, $num_temporadas, 
                         './imagenes/$nombre_imagen')
                 ";
 
-                $_conexion -> query($sql);
+                $_conexion -> query($sql);*/
+
+                #1.Prepare
+                $sql = $_conexion -> prepare ("INSERT INTO animes 
+                    (titulo, nombre_estudio, anno_estreno, num_temporadas, imagen)
+                    VALUES
+                    (?,?,?,?,?)");
+                #2.Binding
+                $sql -> bind_param("ssiis", /*esto significa STRING STRING INTER INTER STRING*/
+                    $titulo,
+                    $nombre_estudio,
+                    $anno_estreno,
+                    $num_temporadas,
+                    $nombre_imagen
+                );
+                #3.Execute
+                $sql -> execute();
+
             }
 
 
