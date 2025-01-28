@@ -29,11 +29,13 @@
 
     function manejarGet($_conexion) {
         //echo json_encode(["metodo" => "get"]);
-        $sql = "SELECT * FROM animes";
+       /* $sql = "SELECT * FROM animes";
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute();
         $resultado = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($resultado);
+        echo json_encode($resultado);*/
+
+        echo json_encode(["estudio" => $_GET["estudio"]]);
     }
 
     function manejarPost($_conexion, $entrada) { //insertar

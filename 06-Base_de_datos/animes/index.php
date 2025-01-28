@@ -42,7 +42,7 @@
                  */
                 #1.Preparacion (Definimos la estructura de la sentencia)
                 $sql = $_conexion -> prepare("DELETE FROM animes WHERE id_animes = ?");
-                #2.Enlazamos (Vinculamos las interrogaciones con variables uy tipos)
+                #2.Enlazamos (Vinculamos las interrogaciones con variables y tipos)
                 $sql -> bind_param("i", $id_anime);
                 #3.Ejecución
                 $sql -> execute();

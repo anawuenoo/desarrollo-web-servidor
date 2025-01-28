@@ -28,12 +28,15 @@
     }
 
     function manejarGet($_conexion) {
+        
+
         //echo json_encode(["metodo" => "get"]);
         $sql = "SELECT * FROM estudios";
         $stmt = $_conexion -> prepare($sql);
         $stmt -> execute();
         $resultado = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($resultado);
+        //echo json_encode(["ciudad" => $_GET["ciudad"]]);
     }
 
     function manejarPost($_conexion, $entrada) { //insertar
