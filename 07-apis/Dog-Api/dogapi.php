@@ -3,33 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nuevo Producto</title>
+    <title>Perro RANDOM</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <?php
         error_reporting( E_ALL );
         ini_set( "display_errors", 1 );
+        
+        
+       
     ?>
     <style>
-        .table-primary{
-            --bs-table-color-state:blue;
-            --bs-table-bg:white;
+        img{
+            width: 200px;
+            height: 200px;
         }
     </style>
 </head>
 <body>
    
     <?php
-        if ($_SERVER["REQUEST_METHOD"]=="GET"){
-           
-
-        $url="https://dog.ceo/api/breeds/image/random";
-            if (!empty($genero)&&!empty($especie)) {
-                
-                $url=$url . "/?species=$especie&gender=$genero";
-            }else {
-                $err="todos los campos son obligatorios";
-              
-            }
+        
+        $url="https://dog.ceo/api/breeds/image/random"; 
         print_r($url);
         $curl=curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
@@ -38,43 +32,16 @@
         curl_close($curl);
 
         $datos=json_decode($respuesta,true);
-        $animes=$datos["results"];
-        }
+        $animes=$datos["message"];
+        
     ?>
     
+
+    <button type="button" onclick="location.reload();">Random</button>
     <div class="container">
-                
-        <?php if(isset($err)) echo "<span class='error'>$err</span>"; ?>
-
-        
-        <table class="table table-striped">
-            <thead class="table-primary">
-                <tr>
-                    <th>Imagen</th>
-                </tr>
-            </thead>
-                <tbody>
-                <?php  
-                    $prueba=0;
-                while ($prueba < $cantidad) { ?>
-                <tr>
-                    <td> <?php echo $animes[$prueba]["name"] ?>  </td>
-                    <td>  <?php echo $animes[$prueba]["gender"] ?>  </td>
-                    <td>  <?php echo $animes[$prueba]["species"] ?>  </td>
-                    <td>  <?php echo $animes[$prueba]["origin"]["name"] ?>  </td> 
-                    <td>  <img src="<?php echo $animes[$prueba]["image"] ?>" alt="" >  </td>                    
-                </tr>
-
-            <?php 
-                if ($prueba+1>=count($animes)) {
-                    $prueba=$cantidad;
-                }
-                $prueba++;
-                }   ?>
-               
-            </tbody>
-        </table>
+        <img src="<?php echo $animes ?>" alt="">
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
