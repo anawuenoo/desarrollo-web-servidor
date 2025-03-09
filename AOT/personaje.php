@@ -16,6 +16,14 @@
         td {
             border: 1px solid black;
         }
+
+        table {
+            margin-left: 580px;
+        }
+
+        h1 {
+            margin-left: 550px;
+        }
     </style>
 </head>
 
@@ -23,21 +31,19 @@
 
     <?php
     /*Ejercicio 2: Añade, en el nombre de cada personaje, un enlace que nos llevará a una página llamada personaje.php, donde se mostrará la siguiente información del personaje:
-       Nombre - Primera letra en mayúscula
-       Raza - Primera letra en mayúscula
-       Género - Primera letra en mayúscula
-       Imagen
-       Descripción
-       Nombre e imagen de sus transformaciones - En una lista ordenada. Si el personaje no tiene transformaciones, se mostrará un encabezado h3 que lo indique.*/
+   Nombre 
+   Edad
+   Género 
+   Imagen
+   Roles  
+   En una lista sin ordenar. Si el personaje no tiene roles, se mostrará un encabezado h3 que lo indique.
+   */
 
-    $url = "https://dragonball-api.com/api/characters";
-
-    if (!empty($_GET["id"])) {
-        $id = $_GET["id"];
-        $url .= "/" . $id;
-    } else {
+    if (!isset($_GET["id"])) {
         header("location: index.php");
     }
+    $id = $_GET["id"];
+    $url = "https://api.attackontitanapi.com/characters/$id";
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
@@ -61,37 +67,45 @@
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Raza</th>
+                <th>Edad</th>
                 <th>Genero</th>
                 <th>Imagen</th>
-                <th>Descripcion</th>
-                <th>Transformaciones</th>
+                <th>Roles</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><?php echo $datos["name"] ?> </td>
-                <td> <?php echo $datos["race"] ?> </td>
-                <td> <?php echo $datos["gender"] ?> </td>
-                <td> <img src="<?php echo $datos["image"] ?>" alt=""> </td>
-                <td> <?php echo $datos["description"] ?> </td>
+
+                <td><?php echo $datos["name"]; ?></td>
+                <td><?php echo $datos["age"]; ?></td>
+                <td><?php echo $datos["gender"]; ?></td>
+
                 <td>
-                    <ol>
-                        <?php
-                        if (count($datos["transformations"]) > 0) {
-                            foreach ($datos["transformations"] as $dz) { ?>
-                                <li><?php echo $dz["name"] ?> </li>
-                                <img src="<?php echo $dz["image"] ?>" alt="">
-                            <?php }
-                        } else { ?>
-                            <h3>No hay transformaciones</h3>
-                        <?php } ?>
-                    </ol>
+                    <?php
+                    if (isset($datos["img"])) {
+                        $imagen = $datos["img"];
+                        $imagen = substr($imagen, 0, strpos($imagen, ".png") + 4);
+                        echo "<img width='200px' src='" . $imagen . "' alt='Imagen de " . $datos["name"] . "'>";
+                    } else {
+                        echo "Este personaje no tiene imagen";
+                    }
+                    ?>
+                </td>
+
+                <td>
+                    <?php if (isset($datos["roles"]) && count($datos["roles"]) > 0) { ?>
+                        <ol>
+                            <?php foreach ($datos["roles"] as $role) { ?>
+                                <li><?php echo $role; ?></li>
+                            <?php } ?>
+                        </ol>
+                    <?php } else { ?>
+                        <h3>Este personaje no tiene roles asignados.</h3>
+                    <?php } ?>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a href="index.php" class="btn btn-primary">Inicio</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>

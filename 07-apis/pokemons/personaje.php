@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen parte 2 Dragon Ball</title>
+    <title>Personaje Pokemons</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -30,7 +30,7 @@
        Descripción
        Nombre e imagen de sus transformaciones - En una lista ordenada. Si el personaje no tiene transformaciones, se mostrará un encabezado h3 que lo indique.*/
 
-    $url = "https://dragonball-api.com/api/characters";
+    $url = "https://pokeapi.co/api/v2/pokemon/";
 
     if (!empty($_GET["id"])) {
         $id = $_GET["id"];
@@ -50,44 +50,54 @@
     $datos = json_decode($respuesta, true);
 
     $personajes = array();
-    if (isset($datos['items'])) {
-        $personajes = $datos['items'];
+    if (isset($datos['results'])) {
+        $personajes = $datos['results'];
     }
 
 
     ?>
-    <h1>TABLA DE DRAGON BALL AMPLIADA</h1>
+    <h1>TABLA DE POKEMONS AMPLIADA</h1>
     <table>
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Raza</th>
-                <th>Genero</th>
-                <th>Imagen</th>
-                <th>Descripcion</th>
-                <th>Transformaciones</th>
+                <th>Habilidades</th>
+                <th>Formas</th>
+                <th>Imagen/tr></th>
+                
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><?php echo $datos["name"] ?> </td>
-                <td> <?php echo $datos["race"] ?> </td>
-                <td> <?php echo $datos["gender"] ?> </td>
-                <td> <img src="<?php echo $datos["image"] ?>" alt=""> </td>
-                <td> <?php echo $datos["description"] ?> </td>
-                <td>
-                    <ol>
-                        <?php
-                        if (count($datos["transformations"]) > 0) {
-                            foreach ($datos["transformations"] as $dz) { ?>
-                                <li><?php echo $dz["name"] ?> </li>
-                                <img src="<?php echo $dz["image"] ?>" alt="">
+            <td>
+            <ol>
+                <?php
+                        if (count($datos["abilities"]) > 0) {
+                            foreach ($datos["abilities"] as $dz) { ?>
+                                <li><?php echo $dz["ability"]["name"] ?> </li>
                             <?php }
                         } else { ?>
                             <h3>No hay transformaciones</h3>
-                        <?php } ?>
-                    </ol>
+                        <?php } ?>  
+                </ol>
+                                        
                 </td>
+
+                <td>
+                <ol>
+                        <?php
+                        if (count($datos["forms"]) > 0) {
+                            foreach ($datos["forms"] as $dz) { ?>
+                                <li><?php echo $dz["name"] ?> </li>
+                            <?php }
+                        } else { ?>
+                            <h3>No hay transformaciones</h3>
+                        <?php } ?>  
+                    </ol>                
+                </td>
+                <td>
+                    <img src="<?php echo $datos["sprites"]["front_default"]; ?>" alt="Imagen de <?php echo $datos["name"]; ?>">
+                </td>
+
             </tr>
         </tbody>
     </table>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen parte 1 Dragon Ball</title>
+    <title>RICKY Y MORTY</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -42,14 +42,13 @@
     } else {
         $limit = 5;
     }
-    if (isset($_GET["page"])) {
-        $page = $_GET["page"];
-        $limit = $_GET["limit"];
+    if (isset($_GET["pages"])) {
+        $page = intval($_GET["pages"]);
     } else {
         $page = 1;
     }
 
-    $url = "https://dragonball-api.com/api/characters?page=$page&limit=$limit";
+    $url = "https://rickandmortyapi.com/api/character?page=$page&limit=$limit";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -61,8 +60,8 @@
     $datos = json_decode($respuesta, true);
 
     $personajes = array();
-    if (isset($datos['items'])) {
-        $personajes = $datos['items'];
+    if (isset($datos['results'])) {
+        $personajes = $datos['results'];
     }
     /**Ejercicio 2: Añade, en el nombre de cada personaje, un enlace que nos llevará a una página llamada personaje.php, donde se mostrará la siguiente información del personaje:
     Nombre - Primera letra en mayúscula
@@ -88,12 +87,12 @@
     página hasta la antepenúltima.*/
     ?>
     <div class="container">
-        <h1>TABLA DE DRAGON BALL</h1>
+        <h1>TABLA DE RICKY Y MORTY</h1>
         <table class="table table-striped">
             <thead class="table-primary">
                 <tr>
                     <th>Nombre</th>
-                    <th>Raza</th>
+                    <th>Especie</th>
                     <th>Genero</th>
                     <th>Imagen</th>
                 </tr>
@@ -102,8 +101,8 @@
                 <?php foreach ($personajes as $fila): ?>
                     <tr>
                         <td> <a href="personaje.php?id=<?php echo $fila["id"] ?>"> <?php echo $fila["name"] ?> </a> </td>
+                        <td><?php echo $fila["species"]; ?></td>
                         <td><?php echo $fila["gender"]; ?></td>
-                        <td><?php echo $fila["race"]; ?></td>
                         <td><img src="<?php echo $fila["image"]; ?>">
                     </tr>
                 <?php endforeach; ?>
@@ -116,7 +115,7 @@
         if ($page >= 3) {
             ?>
 
-            <a href="index.php?page=1&limit=<?php echo $limit ?>" class="btn btn-primary">
+            <a href="index.php?pages=1&limit=<?php echo $limit ?>" class="btn btn-primary">
                 Inicio
             </a>
 
@@ -125,7 +124,7 @@
         if ($page != 1) {
             ?>
 
-            <a href="index.php?page=<?php echo $page - 1 ?>&limit=<?php echo $limit ?>" class="btn btn-danger">
+            <a href="index.php?pages=<?php echo $page - 1 ?>&limit=<?php echo $limit ?>" class="btn btn-danger">
                 Anterior
             </a>
 
@@ -135,7 +134,7 @@
         if ($page < $limite) {
             ?>
 
-            <a href="index.php?page=<?php echo $page + 1 ?>&limit=<?php echo $limit ?>" class="btn btn-success">
+            <a href="index.php?pages=<?php echo $page + 1 ?>&limit=<?php echo $limit ?>" class="btn btn-success">
                 Siguiente
             </a>
 
@@ -144,7 +143,7 @@
         if ($page < $limite) {
             ?>
 
-            <a href="index.php?page=<?php echo $limite ?>&limit=<?php echo $limit ?>" class="btn btn-info">
+            <a href="index.php?pages=<?php echo $limite ?>&limit=<?php echo $limit ?>" class="btn btn-info">
                 Final
             </a>
 

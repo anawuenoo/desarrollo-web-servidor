@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examen parte 1 Dragon Ball</title>
+    <title>ONE PIECE</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <style>
@@ -21,7 +21,7 @@
             width: 600px;
         }
 
-        #prueba a{
+        #prueba a {
             margin-left: 300px;
         }
 
@@ -49,7 +49,7 @@
         $page = 1;
     }
 
-    $url = "https://dragonball-api.com/api/characters?page=$page&limit=$limit";
+    $url = "https://api.api-onepiece.com/v2/characters/en?page=$page&limit=$limit";
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -60,10 +60,7 @@
     curl_close($curl);
     $datos = json_decode($respuesta, true);
 
-    $personajes = array();
-    if (isset($datos['items'])) {
-        $personajes = $datos['items'];
-    }
+    $personajes = $datos;
     /**Ejercicio 2: Añade, en el nombre de cada personaje, un enlace que nos llevará a una página llamada personaje.php, donde se mostrará la siguiente información del personaje:
     Nombre - Primera letra en mayúscula
     Raza - Primera letra en mayúscula
@@ -88,23 +85,36 @@
     página hasta la antepenúltima.*/
     ?>
     <div class="container">
-        <h1>TABLA DE DRAGON BALL</h1>
+        <h1>TABLA DE ONE PIECE</h1>
         <table class="table table-striped">
             <thead class="table-primary">
                 <tr>
                     <th>Nombre</th>
-                    <th>Raza</th>
-                    <th>Genero</th>
-                    <th>Imagen</th>
+                    <th>Edad</th>
+                    <th>Talla</th>
+                    <th>Crew</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($personajes as $fila): ?>
                     <tr>
                         <td> <a href="personaje.php?id=<?php echo $fila["id"] ?>"> <?php echo $fila["name"] ?> </a> </td>
-                        <td><?php echo $fila["gender"]; ?></td>
-                        <td><?php echo $fila["race"]; ?></td>
-                        <td><img src="<?php echo $fila["image"]; ?>">
+                        <td><?php echo $fila["age"]; ?></td>
+                        <td><?php echo $fila["size"]; ?></td>
+                        <td>
+                            <ol>
+                                <?php
+
+                                if (isset($fila["crew"])) {
+                                    echo "<p>" . $fila["crew"]["name"] . "</p>";
+                                } else {
+                                    echo "<h3>No hay crew</h3>";
+                                }
+                                ?>
+
+
+                            </ol>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
